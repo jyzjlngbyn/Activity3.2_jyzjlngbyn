@@ -177,3 +177,13 @@ SELECT h.hero_name, c.class_name
 FROM hero h 
 JOIN public.class c ON  h.class_id = c.class_id
 WHERE c.class_name = 'Archer';
+--7. Create new branch named "feat/select-avg-playerlevel-per-class"
+
+--Retrieve the average player level for each class.
+SELECT c.class_name, AVG(p.player_level) AS average
+FROM public.class c 
+LEFT JOIN public.hero h ON c.class_id = h.class_id
+LEFT JOIN public.player p ON h.hero_id = p.hero_id
+GROUP BY c.class_name
+ORDER BY average
+DESC;
